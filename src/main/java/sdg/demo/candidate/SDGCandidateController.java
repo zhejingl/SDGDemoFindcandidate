@@ -35,7 +35,7 @@ public class SDGCandidateController {
         this.restTemplate = restTemplate;
     }
 
-    @RequestMapping(value = "/{title}", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/api/sdg/demo/candiate/{title}", method = RequestMethod.GET)
     public ResponseEntity<String> getCandidate(@RequestHeader("User-Agent") String userAgent, 
     											@RequestHeader(value = "user-preference", 		
     											required = false) String userPreference,
