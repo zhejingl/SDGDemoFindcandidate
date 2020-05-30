@@ -11,7 +11,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "*.apps.appdev-6.pd.stonedoor.io"
+    - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -19,10 +19,15 @@ metadata:
   name: sdgcandiate
 spec:
   hosts:
-  - "*.apps.appdev-6.pd.stonedoor.io"
+  - "*"
   gateways:
   - sdgcandiate-gateway
   http:
   - match:
     - uri:
         prefix: /v1/api/sdg/demo/candidate
+    route:
+    - destination:
+        host: productpage
+        port:
+          number: 8080
