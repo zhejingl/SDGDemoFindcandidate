@@ -24,9 +24,10 @@ public class SDGCandidateController {
 
     private final RestTemplate restTemplate;
 
+    /*
     @Autowired
     private Tracer tracer;
-
+	*/
     @Value("${preferences.api.url:http://preference:8080}")
     private String remoteURL;
     
@@ -43,11 +44,12 @@ public class SDGCandidateController {
             /**
              * Set baggage
              */
+        	/*
             tracer.activeSpan().setBaggageItem("user-agent", userAgent);
             if (userPreference != null && !userPreference.isEmpty()) {
                 tracer.activeSpan().setBaggageItem("user-preference", userPreference);
             }
-
+			*/
             ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL+"/"+title, String.class);
             String response = responseEntity.getBody();
             return ResponseEntity.ok(String.format(RESPONSE_STRING_FORMAT, response.trim()));

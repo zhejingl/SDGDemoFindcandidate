@@ -18,8 +18,10 @@ public class SdgDemoFindcandidateApplication {
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder.build();
     }
+	/*
 	@Bean
 	public io.opentracing.Tracer tracer() {
 		return Configuration.fromEnv().getTracer();
 	}
+	*/
 }
