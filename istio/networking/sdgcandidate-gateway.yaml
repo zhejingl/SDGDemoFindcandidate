@@ -28,6 +28,6 @@ spec:
         prefix: /v1/api/sdg/demo/candidate
     route:
     - destination:
-        host: productpage
+        host: sdgcandiate
         port:
           number: 8080
