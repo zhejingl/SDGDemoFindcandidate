@@ -1,0 +1,46 @@
+1. Installation via Operator
+   After install ElasticSearch, Jaeger, RHSM, start deploy Control Plane from the Web console
+   a. Create a project istio-system
+   b. Navigate to Operators → Installed Operators. 
+   	   Click the Red Hat OpenShift Service Mesh Operator. Under Provided APIs, the Operator provides 
+   	   links to create two resource types:
+    		A ServiceMeshControlPlane resource
+    		A ServiceMeshMemberRoll resource 
+   c. Under Istio Service Mesh Control Plane click Create ServiceMeshControlPlane.
+   d. On the Create Service Mesh Control Plane page, modify the YAML for the default 
+      ServiceMeshControlPlane template as needed. 
+   e. Click the Istio Service Mesh Control Plane tab. 
+   f. Click the name of the new control plane. 
+   g. Click the Resources tab to see the Red Hat OpenShift Service Mesh control plane resources 
+      the Operator created and configured. 
+      
+2. Install via Command Line
+	oc new-project istio-system
+	oc create -n istio-system -f istio-installation.yaml
+	# check the status for istio-system:
+	oc get smcp -n istio-system
+	# watch the progress of the Pods during the installation process: 
+	oc get pods -n istio-system -w
+	
+3. Creating the Red Hat OpenShift Service Mesh member roll
+
+	The ServiceMeshMemberRoll lists the projects belonging to the control plane. Only projects listed in 
+the ServiceMeshMemberRoll are affected by the control plane. A project does not belong to a service mesh 
+until you add it to the member roll for a particular control plane deployment.
+
+ You must create a ServiceMeshMemberRoll resource named "default" in the same project as the 
+ ServiceMeshControlPlane.
+ 
+     a. Create Member roll
+      oc create -n istio-system -f servicemeshmemberroll-default.yaml
+     b. Create Members
+      oc policy add-role-to-user -n <control-plane-namespace> --role-namespace <control-plane-namespace> mesh-user <user-name>
+     
+    or edit servicememberroll
+      oc edit smmr -n isto-system
+    
+4. Updating application pods
+   oc patch deployment/<deployment> -p '{"spec":{"template":{"metadata":{"annotations":{"kubectl.kubernetes.io/restartedAt": "'`date -Iseconds`'"}}}}}'
+	
+     
+      
