@@ -13,8 +13,13 @@ FROM openjdk:8-jdk-alpine
 LABEL maintainer="kenny.j.yang@gmail.com"
 # Add a volume pointing to /tmp
 VOLUME /tmp
+
+ARG service_version
+ENV SERVICE_VERSION ${service_version:-v1}
+
 # Make port 8080 available to the world outside this container
-EXPOSE 8080 8778 9779
+# EXPOSE 8080 8778 9779
+EXPOSE 9080
 
 # The application's jar file
 ARG JAR_FILE=target/SDGDemoFindcandidate-0.0.1.jar
