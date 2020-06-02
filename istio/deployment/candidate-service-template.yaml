@@ -44,6 +44,7 @@ spec:
         image: docker.io/zhejingl/candidate:latest
         ports:
         - containerPort: 9080
+        name: candidate
         resources:
           limits:
             cpu: 250m
