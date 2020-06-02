@@ -7,7 +7,6 @@ metadata:
     app: candidate
     application: candidate
     version: v1
-
   name: candidate-v1
 spec:
   selector:
@@ -42,7 +41,7 @@ spec:
               apiVersion: v1
               fieldPath: metadata.namespace
 
-        image: docker.io/rhtgptetraining/SDGDemoFindcandidate:0.0.1
+        image: docker.io/zhejingl/candidate:latest
         ports:
         - containerPort: 8080
 
