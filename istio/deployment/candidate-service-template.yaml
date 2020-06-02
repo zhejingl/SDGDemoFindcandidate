@@ -43,13 +43,13 @@ spec:
 
         image: docker.io/zhejingl/candidate:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 9080
 
         livenessProbe:
           failureThreshold: 2
           httpGet:
             path: /health
-            port: 8080
+            port: 9080
             scheme: HTTP
           initialDelaySeconds: 60
           periodSeconds: 10
@@ -60,7 +60,7 @@ spec:
           failureThreshold: 3
           httpGet:
             path: /health
-            port: 8080
+            port: 9080
             scheme: HTTP
           initialDelaySeconds: 20
           periodSeconds: 10
