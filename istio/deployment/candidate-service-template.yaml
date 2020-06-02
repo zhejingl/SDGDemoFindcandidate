@@ -7,13 +7,13 @@ metadata:
     app: candidate
     application: candidate
     version: v1
-  name: candidate
+  name: candidate-v1
 spec:
   selector:
     matchLabels:
       app: candidate
       application: candidate
-      deployment: canadidate
+      deployment: candidate
       version: v1
   strategy:
     rollingUpdate:
@@ -27,7 +27,6 @@ spec:
         application: candidate
         deployment: candidate
         version: v1
-
       # Enable Red Hat Service Mesh's automatic istio sidecar injection
       annotations:
         sidecar.istio.io/inject: "true"
