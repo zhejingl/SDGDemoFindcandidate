@@ -46,7 +46,7 @@ spec:
       serviceAccountName: sdgdemo-candidate
       containers:
       - name: candidate
-        image: maistra/examples-bookinfo-details-v1:1.1.0
+        image: zhejingl/candidate:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080
