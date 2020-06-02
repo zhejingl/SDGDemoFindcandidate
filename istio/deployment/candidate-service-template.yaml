@@ -11,6 +11,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      app: candidate
       application: candidate
       deployment: canadidate
       version: v1
