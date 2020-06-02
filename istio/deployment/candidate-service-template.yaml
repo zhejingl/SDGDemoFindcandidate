@@ -7,7 +7,7 @@ metadata:
     app: candidate
     application: candidate
     version: v1
-  name: candidate-v1
+  name: candidate
 spec:
   selector:
     matchLabels:
