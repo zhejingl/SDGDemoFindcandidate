@@ -12,6 +12,7 @@ public class SdgDemoFindcandidateApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SdgDemoFindcandidateApplication.class, args);
+		System.out.println("SDGDemo Application is up and running: candidate service");
 	}
 	@Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {

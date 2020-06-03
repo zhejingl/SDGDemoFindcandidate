@@ -24,8 +24,7 @@ public class SDGCandidateController {
     @Autowired
     private Tracer tracer;
 	*/
-    @Value("${preferences.api.url:http://titles:9080}")
-    private String remoteURL;
+    private String remoteURL = "http://titles:9080";
     
     public SDGCandidateController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -49,7 +48,7 @@ public class SDGCandidateController {
         }
     }
     
-    @RequestMapping(value = "/v1/api/sdg/demo/candidate/{title}", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/api/sdg/demo/candidate/check/{title}", method = RequestMethod.GET)
     public ResponseEntity<String> getCandidate(@RequestHeader("User-Agent") String userAgent, 
     											@RequestHeader(value = "user-preference", 		
     											required = false) String userPreference,
@@ -64,7 +63,7 @@ public class SDGCandidateController {
                 tracer.activeSpan().setBaggageItem("user-preference", userPreference);
             }
 			*/
-            ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL+"/"+title, String.class);
+            ResponseEntity<String> responseEntity = restTemplate.getForEntity(remoteURL+"/v1/api/sdg/demo/person/checktitle?name="+title, String.class);
             String response = responseEntity.getBody();
             return ResponseEntity.ok(String.format(RESPONSE_STRING_FORMAT, response.trim()));
         } catch (HttpStatusCodeException ex) {
@@ -81,8 +80,7 @@ public class SDGCandidateController {
     @RequestMapping(value = "/v1/api/sdg/demo/candidate/titles", method = RequestMethod.GET)
     public ResponseEntity<String> getTitles(@RequestHeader("User-Agent") String userAgent, 
     											@RequestHeader(value = "user-preference", 		
-    											required = false) String userPreference,
-    											@PathVariable("title") String title) {
+    											required = false) String userPreference) {
         try {
             /**
              * Set baggage
