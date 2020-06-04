@@ -44,6 +44,14 @@ spec:
         image: docker.io/zhejingl/candidate:latest
         ports:
         - containerPort: 9080
+          name: http
+          protocol: TCP
+        - containerPort: 8778
+          name: jolokia
+          protocol: TCP
+        - containerPort: 9779
+          name: prometheus
+          protocol: TCP
         name: candidate
         resources:
           limits:
