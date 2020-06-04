@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: candidate
+    version: v1
+  name: candidate-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: candidate
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: candidate
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTIONS
+          value: -Xmx256m
+        image: zhejingl/candidate:v1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - curl
+            - localhost:9080/health
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 1
+        name: candidate
+        ports:
+        - containerPort: 9080
+          name: http
+          protocol: TCP
+        - containerPort: 8778
+          name: jolokia
+          protocol: TCP
+        - containerPort: 9779
+          name: prometheus
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - curl
+            - localhost:9080/health
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 1
+        securityContext:
+          privileged: false
+        resources:
+          limits:
+            cpu: 1
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 500Mi
+
