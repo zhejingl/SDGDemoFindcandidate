@@ -1,0 +1,106 @@
+##################################################################################################
+# Details service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: candidate
+  labels:
+    app: candidate
+    service: candidate
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    app: candidate
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sdgdemo-candidate
+  labels:
+    account: candidate
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: candidate-v1
+  labels:
+    app: candidate
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: candidate
+      version: v1
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: candidate
+        version: v1
+    spec:
+      serviceAccountName: sdgdemo-candidate
+      containers:
+      - name: candidate
+        image: zhejingl/candidate:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9080
+---
+##################################################################################################
+# Ratings service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: titles
+  labels:
+    app: titles
+    service: titles
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    app: titles
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sdgdemo-titles
+  labels:
+    account: titles
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titles-v1
+  labels:
+    app: ratings
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: titles
+      version: v1
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: titles
+        version: v1
+    spec:
+      serviceAccountName: sdgdemo-titles
+      containers:
+      - name: titles
+        image: zhejingl/titles:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9080
+---
