@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: sdgdemo-candidate
+  name: sdgsmdemo-candidate
   labels:
     account: candidate
 ---
@@ -43,7 +43,7 @@ spec:
         app: candidate
         version: v1
     spec:
-      serviceAccountName: sdgdemo-candidate
+      serviceAccountName: sdgsmdemo-candidate
       containers:
       - name: candidate
         image: zhejingl/candidate:latest
@@ -71,7 +71,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: sdgdemo-titles
+  name: sdgsmdemo-titles
   labels:
     account: titles
 ---
@@ -96,7 +96,7 @@ spec:
         app: titles
         version: v1
     spec:
-      serviceAccountName: sdgdemo-titles
+      serviceAccountName: sdgsmdemo-titles
       containers:
       - name: titles
         image: zhejingl/titles:latest

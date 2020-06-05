@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: candidate
+spec:
+  host: candidate
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: titles
+spec:
+  host: titles
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+---

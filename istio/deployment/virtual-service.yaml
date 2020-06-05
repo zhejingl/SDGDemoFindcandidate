@@ -1,0 +1,26 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: candidate
+spec:
+  hosts:
+  - candidate
+  http:
+  - route:
+    - destination:
+        host: candidate
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: titles
+spec:
+  hosts:
+  - titles
+  http:
+  - route:
+    - destination:
+        host: titles
+        subset: v1
+---

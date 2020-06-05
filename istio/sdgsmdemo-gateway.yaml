@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: sdgdemo-gateway
+  name: sdgsmdemo-gateway
 spec:
   selector:
     istio: ingressgateway # use istio default controller
@@ -16,20 +16,16 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: candidate
+  name: bookinfo
 spec:
   hosts:
   - "*"
   gateways:
-  - sdgdemo-gateway
+  - sdgsmdemo-gateway
   http:
   - match:
     - uri:
-        exact: /
-    - uri:
-        prefix: /v1/api/sdg/demo/candidate
-    - uri:
-        prefix: /v1/api/sdg/demo/candiate
+        prefix: /v1/api/sdg
     route:
     - destination:
         host: candidate
